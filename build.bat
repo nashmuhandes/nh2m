@@ -1,0 +1,1 @@
+7z a -r -ssw -tzip -x!hc\ nh2m.zip .\nh2m_data1 .\nh2m_portals
