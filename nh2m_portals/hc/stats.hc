@@ -249,12 +249,14 @@ void stats_NewPlayerCatchup(entity e)
 	//dprint(ftos(floor(highestLevel)));
 	//dprint("\n");
 
+	highestLevel -= 1;
+
 	local entity oself;
 	oself = self;
 	self = e;
 	while (highestLevel > 0)
 	{
-		PlayerAdvanceLevel(self.level + 1);
+		player_level_cheat();
 		highestLevel -= 1;
 	}
 	self = oself;
