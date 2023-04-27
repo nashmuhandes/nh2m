@@ -841,7 +841,7 @@ CheatCommand
 */
 void() CheatCommand =
 {
-	if(deathmatch||coop)
+	if(deathmatch)
 		return;
 
 	self.items(+)IT_WEAPON1|IT_WEAPON2|IT_WEAPON3|IT_WEAPON4|IT_WEAPON4_1|IT_WEAPON4_2;

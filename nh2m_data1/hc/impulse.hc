@@ -101,7 +101,7 @@ float gotone;
 
 void player_everything_cheat(void)
 {
-	if(deathmatch||coop)
+	if(deathmatch)
 		return;
 
 	CheatCommand();		// Give them weapons and mana	
@@ -383,7 +383,7 @@ void() ImpulseCommands =
 	}*/
 	else if(self.impulse==25)
 	{
-		if(deathmatch||coop)
+		if(deathmatch)
 		{
 			self.impulse=0;
 			return;
@@ -394,9 +394,9 @@ void() ImpulseCommands =
 			Use_TomeofPower();
 		}
 	}
-	else if(self.impulse==39&&skill<3)
+	else if(self.impulse==39)
 	{
-		if(deathmatch||coop)
+		if(deathmatch)
 		{
 			self.impulse=0;
 			return;
@@ -409,9 +409,9 @@ void() ImpulseCommands =
 				player_stopfly();
 		}
 	}
-	else if(self.impulse==40&&skill<3)
+	else if(self.impulse==40)
 	{
-		if(deathmatch||coop)
+		if(deathmatch)
 		{
 			self.impulse=0;
 			return;
@@ -419,9 +419,9 @@ void() ImpulseCommands =
 		else
 			player_level_cheat();
 	}
-	else if(self.impulse==41&&skill<3)
+	else if(self.impulse==41)
 	{
-		if(deathmatch||coop)
+		if(deathmatch)
 		{
 			self.impulse=0;
 			return;
