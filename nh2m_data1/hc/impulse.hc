@@ -522,9 +522,9 @@ void() ImpulseCommands =
 		newmis.angles=self.angles;
 		setorigin(newmis,self.origin);
 
-		if(!deathmatch&&!coop)
-			parm7=self.newclass;//Just to tell respawn() not to use restart
-		else
+//		if(!deathmatch&&!coop)
+//			parm7=self.newclass;//Just to tell respawn() not to use restart
+//		else
 		{
 			self.model=self.init_model;
 			GibPlayer();
