@@ -768,3 +768,5 @@ entity	sight_entity;	//So monsters wake up other monsters
 .float fire_damage;
 .float scoped;
 
+// [Nash]
+.float isNewPlayer;

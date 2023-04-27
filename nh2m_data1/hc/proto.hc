@@ -28,6 +28,7 @@ void AwardExperienceCoop(entity ToEnt, entity FromEnt, float Amount);
 
 void() SetModelAndThinks;
 void stats_NewPlayer(entity e);
+void stats_NewPlayerCatchup(entity e);
 
 void()shock_think;
 void(vector org)spawnshockball;

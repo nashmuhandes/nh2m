@@ -199,6 +199,67 @@ void stats_NewPlayer(entity e)
 
 	e.level = 1;
 	e.experience = 0;
+
+	// [Nash] mark the new player. We'll do the level-catching-up in PlayerPostThink
+	e.isNewPlayer = 1;
+}
+
+void stats_NewPlayerCatchup(entity e)
+{
+	if (self.classname != "player")
+		return;
+
+	//dprint(self.netname);
+	//dprint(" just joined");
+	//dprint("\n");
+
+	local entity found;
+	local float totalPlayers;
+	found = find(world, classname, "player");
+	while (found)
+	{
+		totalPlayers += 1;
+		found = find(found, classname, "player");
+	}
+
+	//dprint("total players: ");
+	//dprint(ftos(floor(totalPlayers)));
+	//dprint("\n");
+
+	local float highestLevel;
+	if (totalPlayers > 1)
+	{
+		// find the player with the highest level
+		local entity found2;
+		found2 = find(world, classname, "player");
+		while (found2)
+		{
+			if (found2.level > 0)
+			{
+				if (highestLevel < found2.level)
+				{
+					highestLevel = found2.level;
+				}
+			}
+			found2 = find(found2, classname, "player");
+		}		
+	}
+
+	//dprint("highest level: ");
+	//dprint(ftos(floor(highestLevel)));
+	//dprint("\n");
+
+	local entity oself;
+	oself = self;
+	self = e;
+	while (highestLevel > 0)
+	{
+		PlayerAdvanceLevel(self.level + 1);
+		highestLevel -= 1;
+	}
+	self = oself;
+
+	e.isNewPlayer = 2;
 }
 
 // Jump ahead one level

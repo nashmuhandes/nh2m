@@ -1938,6 +1938,10 @@ void() PlayerPostThink =
 	if (self.deadflag)
 		return;
 
+	// [Nash] newly-joining players will have their levels caught up to the player with the highest level!
+	if (self.isNewPlayer == 1)
+		stats_NewPlayerCatchup(self);
+
 // do weapon stuff
 	W_WeaponFrame ();
 
