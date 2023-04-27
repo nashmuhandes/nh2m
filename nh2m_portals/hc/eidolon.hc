@@ -813,7 +813,10 @@ float pain_chance;
 		self.flags(+)FL_GODMODE;
 		self.th_pain=SUB_Null;
 		if(attacker.classname=="player")
+		{
 			AwardExperience(attacker,self,self.experience_value);
+			AwardExperienceCoop(attacker,self,self.experience_value);
+		}
 		sound(self,CHAN_VOICE,"eidolon/fakedie.wav",1,ATTN_NONE);
 		self.goalentity=self.enemy;
 		self.think=eidolon_fake_die;

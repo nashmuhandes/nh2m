@@ -255,7 +255,10 @@ entity lastleader,newking;
 			return exp_base;//exp_bonus only for fatalities
 		}
 		else
+		{
 			AwardExperience(attacker,targ,exp_base+exp_bonus);
+			AwardExperienceCoop(attacker,targ,exp_base+exp_bonus);
+		}
 	}
 	return TRUE;
 }

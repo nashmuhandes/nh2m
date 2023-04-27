@@ -115,6 +115,7 @@ entity oself;
 		loser.deathtype="ice melt";
 		loser.th_die=shatter;
 		AwardExperience(forwhom,loser,loser.experience_value);
+		AwardExperienceCoop(forwhom,loser,loser.experience_value);
 		loser.experience_value=0;
 		oself=self;
 		self=loser;

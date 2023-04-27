@@ -424,6 +424,28 @@ void AwardExperience(entity ToEnt, entity FromEnt, float Amount)
 }
 
 
+void AwardExperienceCoop(entity ToEnt, entity FromEnt, float Amount)
+{
+	// [Nash] other players get half EXP in coop
+	if (coop)
+	{
+		entity found;
+		found = find(world, classname, "player");
+		while (found)
+		{
+			if (found != ToEnt)
+			{
+				if (found.deadflag == DEAD_NO)
+				{
+					AwardExperience(found, FromEnt, Amount * 0.5);
+				}
+			}
+			found = find(found, classname, "player");
+		}				
+	}
+}
+
+
 /*
 ======================================
 void stats_NewClass(entity e)

@@ -294,7 +294,10 @@ float exp_bonus;
 			drop_level(attacker,1);	//Killed friend in coop, lose a level
 
 		else if(attacker.flags&FL_CLIENT&&attacker!=self.controller&&(self.monsterclass<CLASS_BOSS||self.classname=="obj_chaos_orb"))//Bosses award Exp themselves, to all players in coop
+		{
 			AwardExperience(attacker,self,self.experience_value+exp_bonus);
+			AwardExperienceCoop(attacker,self,self.experience_value+exp_bonus);
+		}
 	}
 
 	self.enemy = attacker;

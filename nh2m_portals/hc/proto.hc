@@ -23,6 +23,7 @@ void SUB_UseTargets(void);
 void SUB_Remove(void);
 
 void AwardExperience(entity ToEnt, entity FromEnt, float Amount);
+void AwardExperienceCoop(entity ToEnt, entity FromEnt, float Amount);
 
 void() SetModelAndThinks;
 void stats_NewPlayer(entity e);
