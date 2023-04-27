@@ -568,15 +568,37 @@ down one level.
 
 void drop_level (entity loser,float number)
 {
-float pos;
+float pos,lev_pos,new_exp,mana_dec,health_dec,dec_pos;
 	if(loser.classname!="player")
 		return;
 
+	if(loser.level-number<1)
+	{//would drop below level 1, set to level 1
+		loser.experience=0;
+		dec_pos = (loser.playerclass - 1) * 5;
+		loser.max_health= hitpoint_table[dec_pos];
+		loser.max_mana = mana_table[dec_pos];
+		if(loser.health>loser.max_health)
+			loser.health=loser.max_health;
+		if(loser.bluemana>loser.max_mana)
+			loser.bluemana=loser.max_mana;
+		if(loser.greenmana>loser.max_mana)
+			loser.greenmana=loser.max_mana;
+		return;
+	}
+
+	pos = (loser.playerclass - 1) * (MAX_LEVELS+1);
 	if(loser.level-number>1)
 	{
 		loser.level-=number;
-		pos = (loser.playerclass - 1) * (MAX_LEVELS+1);
-		loser.experience = ExperienceValues[pos+loser.level - 2];
+		lev_pos+=loser.level - 2;
+		if(lev_pos>9)//last number in that char's 
+		{
+			new_exp=ExperienceValues[pos+10];
+			loser.experience=new_exp+new_exp*(lev_pos - 9);
+		}
+		else
+			loser.experience = ExperienceValues[pos+lev_pos];
 	}
 	else
 	{
@@ -589,5 +611,19 @@ float pos;
 
 	if (loser.level <=5)
 		loser.flags(-)FL_SPECIAL_ABILITY2;
+
+	dec_pos = (loser.playerclass - 1) * 5;
+	health_dec = hitpoint_table[dec_pos+4];
+	mana_dec = mana_table[dec_pos+4];
+
+	loser.max_health -= health_dec *number;
+	if(loser.health>loser.max_health)
+		loser.health=loser.max_health;
+
+	loser.max_mana -= mana_dec *number;
+	if(loser.bluemana>loser.max_mana)
+		loser.bluemana=loser.max_mana;
+	if(loser.greenmana>loser.max_mana)
+		loser.greenmana=loser.max_mana;
 }
 

@@ -511,6 +511,12 @@ void PlayerDie ()
 	self.effects=
 	self.colormap=0;
 
+	// [Nash] lose a level when you die in coop.
+	// this can be quite a lossy procedure (due to the original game's level up randomization).
+	// therefore, don't die. git gud
+	if (coop)
+		drop_level(self, 1);
+
 	if (deathmatch || coop)
 		DropBackpack();
 
