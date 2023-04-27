@@ -9,6 +9,14 @@ void Polymorph (entity loser);
 void()sheep_look;
 //void create_swarm (void);
 
+void AnnounceCheater(string playerName, float i)
+{
+	bprint(playerName);
+	bprint(" is a cheater!!! (impulse ");
+	bprint(ftos(floor(i)));
+	bprint(")\n");
+}
+
 void wake_sheep ()
 {
 entity found;
@@ -335,7 +343,10 @@ void() ImpulseCommands =
 		return;
 
 	if (self.impulse == 9&&skill<3)
+	{
+		if (coop||deathmatch) AnnounceCheater(self.netname, self.impulse);
 		CheatCommand ();
+	}
 	else if(self.impulse==177)//Make BBOX model
 		if(self.movechain.model=="models/playrbox.mdl")
 		{
@@ -424,6 +435,7 @@ void() ImpulseCommands =
 	}
 	else if (self.impulse==35&&skill<3)
 	{
+		AnnounceCheater(self.netname, self.impulse);
 		search = nextent(world);
 		total = 0;
 
@@ -440,6 +452,7 @@ void() ImpulseCommands =
 	}
 	else if (self.impulse==36&&skill<3)
 	{
+		AnnounceCheater(self.netname, self.impulse);
 		search = nextent(world);
 		total = 0;
 
@@ -456,6 +469,7 @@ void() ImpulseCommands =
 	}
 	else if (self.impulse==37&&skill<3)
 	{
+		AnnounceCheater(self.netname, self.impulse);
 		search = nextent(world);
 		total = 0;
 
@@ -515,6 +529,7 @@ void() ImpulseCommands =
 		}
 		else
 		{
+			AnnounceCheater(self.netname, self.impulse);
 			self.cnt_tome += 1;
 			Use_TomeofPower();
 		}
@@ -528,6 +543,7 @@ void() ImpulseCommands =
 		}
 		else	// Toggle flight
 		{
+			AnnounceCheater(self.netname, self.impulse);
 			if (self.movetype != MOVETYPE_FLY)
 				player_fly();
 			else
@@ -543,7 +559,10 @@ void() ImpulseCommands =
 			return;
 		}
 		else
+		{
+			AnnounceCheater(self.netname, self.impulse);
 			player_level_cheat();
+		}
 	}
 	else if(self.impulse==41)
 	{
@@ -553,7 +572,10 @@ void() ImpulseCommands =
 			return;
 		}
 		else
+		{
+			AnnounceCheater(self.netname, self.impulse);
 			player_experience_cheat();
+		}
 	}
 	else if (self.impulse == 42)
 	{
@@ -570,7 +592,10 @@ void() ImpulseCommands =
 		sprint(self,"\n");
 	}
 	else if(self.impulse==43&&skill<3)
+	{
+		AnnounceCheater(self.netname, self.impulse);
 		player_everything_cheat();
+	}
 	else if(self.impulse==44)
 		DropInventoryItem();
 /*	else if (self.impulse == 99)
